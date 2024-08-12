@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { URL } from "../utils/constant";
 
 const Admin = () => {
   const [flashcards, setFlashcards] = useState([]);
@@ -15,7 +16,7 @@ const Admin = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:5000/flashcards");
+      const response = await fetch(URL + "/flashcards");
       const data = await response.json();
       setFlashcards(data);
     };
@@ -35,7 +36,7 @@ const Admin = () => {
     if (editIndex !== null) {
       // being edited index!! :)
       const updatedCard = { ...formState, id: flashcards[editIndex].id };
-      await fetch(`http://localhost:5000/flashcards/${updatedCard.id}`, {
+      await fetch(URL + `/flashcards/${updatedCard.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +48,7 @@ const Admin = () => {
       );
       seteditIndex(null);
     } else {
-      const response = await fetch("http://localhost:5000/flashcards", {
+      const response = await fetch(URL + "/flashcards", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,11 +65,10 @@ const Admin = () => {
     seteditIndex(idx);
   };
 
-  
-const handleDeleteClick = async (idx) => {
+  const handleDeleteClick = async (idx) => {
     const cardToDelete = flashcards[idx];
-    await fetch(`http://localhost:5000/flashcards/${cardToDelete.id}`, {
-      method: 'DELETE',
+    await fetch(URL + `/flashcards/${cardToDelete.id}`, {
+      method: "DELETE",
     });
     setFlashcards((prev) => prev.filter((_, i) => i !== idx));
   };

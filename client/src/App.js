@@ -3,10 +3,11 @@ import Header from "./components/header.jsx";
 import "./index.css";
 
 import { useEffect, useState } from "react";
+import { URL } from "./utils/constant.js";
 function App() {
   const [flashcards, setFlashcards] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/flashcards")
+    fetch(URL + "/flashcards")
       .then((res) => res.json())
       .then((data) => setFlashcards(data));
   }, []);

@@ -4,7 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
-const port = 5000;
+// const port = 5000;
 require("dotenv").config();
 
 const { URL } = require("url");
@@ -13,7 +13,7 @@ const url = new URL(databaseUrl);
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "*", 
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     optionsSuccessStatus: 200,
@@ -26,7 +26,7 @@ const db = mysql.createConnection({
   port: url.port,
   user: url.username,
   password: url.password,
-  database: url.pathname.slice(1), 
+  database: url.pathname.slice(1),
 });
 
 db.connect((err) => {
@@ -119,6 +119,6 @@ app.delete("/flashcards/:id", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server running at http://localhost:${process.env.PORT}`);
 });
