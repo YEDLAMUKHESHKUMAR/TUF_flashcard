@@ -27,6 +27,9 @@ const db = mysql.createConnection({
   user: url.username,
   password: url.password,
   database: url.pathname.slice(1),
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 db.connect((err) => {
