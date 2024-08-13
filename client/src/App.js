@@ -11,7 +11,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => setFlashcards(data));
   }, []);
-  console.log(flashcards);
+  // console.log(flashcards);
   return (
     <div>
       <div className="App flex justify-center align-middle">
